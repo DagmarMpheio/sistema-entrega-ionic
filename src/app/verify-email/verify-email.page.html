@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verificar Email</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-avatar class="app-image">
+      <img src="assets/img/app-logo.png" alt="Logo da App" />
+    </ion-avatar>
+
+    <ion-row>
+      <h2>Ionic Delivery System - Verifique o Seu Email</h2>
+      <p>
+        Por favor, verifique o seu email e clique no link para validar o seu email.
+      </p>
+      <ion-button type="submit" (click)="authService.SendVerificationMail()" expand="block">
+        Reenviar Verificação de Email
+      </ion-button>
+    </ion-row>
+
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/login']">Já tenho uma conta</ion-button>
+    </ion-buttons>
+  </ion-grid>
+</ion-content>

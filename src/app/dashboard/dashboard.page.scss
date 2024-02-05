@@ -1,0 +1,27 @@
+/* Adicione estilos ao seu arquivo SCSS */
+.welcome-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.welcome-container h1 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.welcome-container p {
+  margin-bottom: 20px;
+}
+
+.welcome-container a {
+  color: #3880ff; /* Cor do link */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user-image {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+}

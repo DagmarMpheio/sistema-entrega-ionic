@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Confirmar Compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="floating">Endereço de Entrega</ion-label>
+    <ion-input [(ngModel)]="deliveryAddress" required></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-select label="Forma de Pagamento" [(ngModel)]="paymentMethod" label-placement="floating" required>
+      <ion-select-option value="Presencial">Presencial</ion-select-option>
+      <ion-select-option value="Referência Bancária">Referência Bancária</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Mostrar apenas se a forma de pagamento for "Referência Bancária" -->
+  <ion-item *ngIf="paymentMethod === 'Referência Bancária'">
+    <ion-label position="floating">Referência Bancária</ion-label>
+    <ion-input [(ngModel)]="bankReference" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="submitForm()" expand="full">
+        <ion-icon name="checkmark-outline"></ion-icon>
+        Confirmar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

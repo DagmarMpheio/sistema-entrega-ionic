@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Carrinho de Compras
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSignOut()" fill="clear">
+        <ion-icon name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
+
+  <ion-list *ngIf="cartItems.length > 0; else emptyCart">
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail slot="start">
+        <img [src]="item.product.imgUrl" alt="{{ item.product.nome }}">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.product.nome }}</h2>
+        <p>Preço: {{ item.product.preco |  currency:'KZ ' }}</p>
+        <p>Quantidade: {{ item.quantity }}</p>
+        <p>Subtotal: {{ item.subtotal |  currency:'KZ ' }}</p>
+      </ion-label>
+      <ion-button (click)="removeFromCart(item.productId)" slot="end">Remover</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item-divider>
+  </ion-item-divider>
+
+  <!-- Taxa de Entrega -->
+  <ion-item>
+    <ion-label>
+      <b>Total de Entrega: KZ 500.00</b>
+    </ion-label>
+  </ion-item>
+
+  <!-- Total a pagar -->
+  <ion-item>
+    <ion-label>
+      <b>Total a pagar: {{ total | currency:'KZ ' }}</b>
+    </ion-label>
+  </ion-item>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart-message">Seu carrinho está vazio.</div>
+  </ng-template>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="clearCart()" expand="full" *ngIf="cartItems.length > 0;">
+          <ion-icon name="trash-outline"></ion-icon> Limpar Carrinho
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="userData.email">
+        <!-- Botão para Continuar Compra se o usuario esta autenticado -->
+        <ion-button (click)="continuarCompra()" expand="full" *ngIf="cartItems.length > 0;">
+          <ion-icon name="arrow-forward-outline"></ion-icon> Continuar Compra
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- Botão para Fazer login -->
+    <ion-row *ngIf="!userData.email">
+      <ion-col>
+        <ion-button [routerLink]="['/login']"  expand="full" color="warning">
+          Fazer login para continuar com a compra
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

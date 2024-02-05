@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSignOut()" fill="clear">
+        <ion-icon name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="profile-container" *ngIf="userData.email">
+    <ion-avatar class="profile-avatar">
+      <ion-img [src]="userData.photoURL" [alt]="userData.displayName"></ion-img>
+    </ion-avatar>
+    <h2>{{ userData.displayName }}</h2>
+    <p>{{ userData.email }}</p>
+  </div>
+  <div class="empty-profile" *ngIf="!userData.email">
+    <ion-grid>
+      <ion-col>
+        <h1>Faça Login para ver os seus dados</h1>
+      </ion-col>
+      <ion-col>
+        <ion-button [routerLink]="['/login']" expand="block">Fazer Login</ion-button>
+      </ion-col>
+    </ion-grid>
+  </div>
+</ion-content>

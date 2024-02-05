@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inserir Desconto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="stacked">Desconto (%)</ion-label>
+    <ion-input type="number" [(ngModel)]="desconto" required min="0" max="100"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="applyDiscount()">Aplicar Desconto</ion-button>
+  <ion-button expand="full" (click)="closeModal()">Cancelar</ion-button>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Produtos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSignOut()" fill="clear">
+        <ion-icon name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!loading">
+    <ion-card *ngFor="let product of products">
+      <!-- Etiqueta de promoção -->
+      <ion-badge *ngIf="product.emPromocao" class="promotion-badge">
+        {{ product.desconto }}%
+      </ion-badge>
+
+      <ion-img [src]="product.imgUrl" [alt]="product.nome" class="product-image"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ product.nome }}</ion-card-title>
+        <!-- Preco normal -->
+        <ion-card-subtitle *ngIf="!product.emPromocao" class="larger-text">{{ product.preco | currency:'KZ ' }}</ion-card-subtitle>
+        <!-- Preco com promocao -->
+        <ion-card-subtitle *ngIf="product.emPromocao" class="larger-text">
+          <del>{{ product.preco | currency:'KZ ' }}</del>
+          <br>
+          {{ productService.calculateDiscountedPrice(product.preco, product.desconto || 0) | currency:'KZ ' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{ product.descricao }}
+      </ion-card-content>
+
+      <!-- Botão para adicionar ao carrinho -->
+      <ion-button (click)="addToCart(product)" fill="clear" color="primary" size="large">
+        <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      
+    </ion-card>  
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+    <p class="loading-message">Carregando...</p>
+  </div>
+  <!-- <div *ngIf="!(productsWithSupermarkets$ | async)">Loading...</div> -->
+</ion-content>

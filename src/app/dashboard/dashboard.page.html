@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar mode="md" fixed>
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSignOut()" fill="clear">
+        <ion-icon name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <div class="welcome-container">
+      <ion-avatar class="user-image">
+        <img [src]="userData.photoURL" [alt]="userData.displayName " />
+      </ion-avatar>
+
+      <ion-card-header>
+        <ion-card-title>
+          Olá, {{ userData.displayName }}!
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Seja bem-vindo à sua Dashboard.</p>
+        <a [routerLink]="['/shops']" expand="block">Clique aqui para ver os supermecados</a>
+      </ion-card-content>
+    </div>
+  </ion-card>
+</ion-content>

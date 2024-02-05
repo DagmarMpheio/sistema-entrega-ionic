@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Supermercados</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!loading">
+    <ion-card *ngFor="let supermercado of supermercados" [routerLink]="['/product-list',supermercado.id]"> 
+      <img [src]="supermercado.imgUrl" [alt]="supermercado.nome" class="shop-image"/>
+
+      <ion-card-header>
+        <ion-card-title>{{ supermercado.nome }}</ion-card-title>
+        <ion-card-subtitle>{{ supermercado.endereco }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{ supermercado.descricao }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+    <p class="loading-message">Carregando...</p>
+  </div>
+</ion-content>

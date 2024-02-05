@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Novo Producto</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/product-list"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="productForm" (ngSubmit)="formSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input formControlName="nome" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Preço</ion-label>
+      <ion-input formControlName="preco" type="number" required> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-input formControlName="descricao" type="text" required> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Supermercado" formControlName="supermercadoId" label-placement="floating">
+        <ion-select-option *ngFor="let supermercado of supermercados" [value]="supermercado.id">  {{ supermercado.nome }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Escolha uma Imagem</ion-label>
+        <ion-input type="file" (change)="onFileSelected($event)" id="imageFile" formControlName="imageFile" accept="image/*"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" shape="full" expand="block">
+          <ion-icon name="save-outline" slot="start"></ion-icon> Guardar 
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

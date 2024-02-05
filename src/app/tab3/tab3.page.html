@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Pedidos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmSignOut()" fill="clear">
+        <ion-icon name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="orders$ | async as orders; else loading">
+    <div class="orders-list">
+      <ion-list *ngIf="orders.length > 0; else emptyOrder">
+        <ion-item-group *ngFor="let order of orders">
+          <ion-item-divider>
+            <ion-label>{{ order.dataHoraCompra | date:'mediumDate' }} - {{order.total | currency:'KZ '}}</ion-label>
+            <ion-buttons slot="end">
+              <ion-button color="primary" (click)="showOrderDetails(order)">
+                Ver Detalhes
+              </ion-button>
+            </ion-buttons>
+          </ion-item-divider>
+          <div *ngIf="selectedOrder === order">
+            <!-- Exibir detalhes do pedido aqui -->
+            <ion-item class="details-header">
+              <ion-label class="details-header-info">
+                <h2>Licença Mensal (Taxa de Entrega)</h2>
+                <p>{{ 500 | currency:'KZ ':'symbol':'1.2-2' }}</p>
+              </ion-label>
+              <ion-buttons slot="end">
+                <ion-button color="warning" (click)="hideOrderDetails()">
+                  <ion-icon name="close"></ion-icon>
+                  Fechar
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+            <ion-item *ngFor="let item of selectedOrder?.items">
+              <ion-avatar slot="start">
+                <ion-img [src]="item.imgUrl" [alt]="item.nome"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ item.nome }}</h2>
+                <p>{{ item.price | currency:'KZ ':'symbol':'1.2-2' }} x {{ item.quantity }} = {{ item.subtotal | currency:'KZ ':'symbol':'1.2-2' }}</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </ion-item-group>
+      </ion-list>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-container">
+      <ion-spinner></ion-spinner>
+      <p class="loading-message">Carregando...</p>
+    </div>
+  </ng-template>
+
+  <ng-template #emptyOrder>
+    <div class="empty-order-message">Parece que ainda não fizeste nenhuma compra.</div>
+  </ng-template>
+
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+</ion-content>

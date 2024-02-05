@@ -1,0 +1,24 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Isso garante que ocupe toda a altura da tela */
+}
+
+.loading-message {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+.empty-order-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Alteração: Usar 100vh para altura total da viewport */
+  color: #555; /* Cor do texto */
+  font-size: 25px; /* Tamanho da fonte */
+  text-align: center; /* Alinhamento do texto */
+}
+
